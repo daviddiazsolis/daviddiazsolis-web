@@ -1,8 +1,5 @@
 @import "tailwindcss";
 
-/* ─── FONTS ─── */
-body { font-family: 'DM Sans', sans-serif; }
-
 /* ─── CSS VARIABLES ─── */
 :root {
   --bg: #0a0a0f;
@@ -73,7 +70,7 @@ html.light nav {
   background: rgba(248,249,252,0.9);
 }
 .nav-logo {
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 800;
   font-size: 1.2rem;
   color: var(--text);
@@ -96,7 +93,7 @@ html.light nav {
   display: flex; align-items: center; gap: 0.5rem;
 }
 .btn-control {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.75rem;
   background: transparent;
   border: 1px solid var(--border2);
@@ -152,7 +149,7 @@ section:nth-child(even) { background: var(--bg2); }
   margin-bottom: 3.5rem;
 }
 .section-label {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   color: var(--accent);
@@ -160,7 +157,7 @@ section:nth-child(even) { background: var(--bg2); }
   text-transform: uppercase;
 }
 .section-title {
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 800;
   font-size: clamp(2rem, 5vw, 3.5rem);
   line-height: 1.1;
@@ -206,7 +203,7 @@ html.light .hero-grid {
 .hero-content { position: relative; z-index: 1; }
 .hero-badge {
   display: inline-block;
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: var(--accent);
@@ -221,7 +218,7 @@ html.light .hero-badge {
   border-color: rgba(8,145,178,0.2);
 }
 .hero-name {
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 800;
   font-size: clamp(3rem, 8vw, 6rem);
   line-height: 1.05;
@@ -252,7 +249,7 @@ html.light .hero-badge {
   margin-bottom: 3rem;
 }
 .btn-primary {
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 700;
   font-size: 0.9rem;
   background: var(--accent);
@@ -265,7 +262,7 @@ html.light .hero-badge {
 }
 .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
 .btn-outline {
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 700;
   font-size: 0.9rem;
   background: transparent;
@@ -282,14 +279,14 @@ html.light .hero-badge {
   display: flex; gap: 3rem; flex-wrap: wrap;
 }
 .stat-num {
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 800;
   font-size: 2rem;
   color: var(--text);
 }
 .stat-num span { color: var(--accent); }
 .stat-label {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.72rem;
   color: var(--text3);
   letter-spacing: 0.06em;
@@ -317,7 +314,7 @@ html.light .hero-badge {
   overflow: hidden;
   flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 800;
   font-size: 1rem;
   color: #000;
@@ -326,12 +323,12 @@ html.light .hero-badge {
   width: 100%; height: 100%; object-fit: cover;
 }
 .profile-info h3 {
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
 }
 .profile-info p {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.72rem;
   color: var(--text3);
   margin-top: 0.15rem;
@@ -358,7 +355,7 @@ html.light .hero-badge {
   display: flex; flex-wrap: wrap; gap: 0.4rem;
 }
 .ext-link {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.68rem;
   color: var(--text3);
   background: var(--bg3);
@@ -397,7 +394,7 @@ html.light .hero-badge {
 }
 .cred-item:hover { background: var(--card-hover); border-color: var(--border2); }
 .cred-degree {
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--text);
@@ -406,14 +403,14 @@ html.light .hero-badge {
 .cred-school {
   font-size: 0.8rem;
   color: var(--accent);
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
 }
 .tags-cloud {
   display: flex; flex-wrap: wrap; gap: 0.5rem;
   margin-top: 2rem;
 }
 .tag {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.72rem;
   color: var(--accent2);
   background: rgba(167,139,250,0.08);
@@ -429,7 +426,7 @@ html.light .hero-badge {
   margin-bottom: 2.5rem;
 }
 .filter-btn {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.75rem;
   background: var(--bg3);
   border: 1px solid var(--border2);
@@ -477,7 +474,7 @@ html.light .hero-badge {
   margin-bottom: 0.5rem;
 }
 .pub-type {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.68rem;
   letter-spacing: 0.08em;
   padding: 0.2rem 0.6rem;
@@ -488,7 +485,7 @@ html.light .hero-badge {
 .pub-type.chapter { background: rgba(52,211,153,0.1); color: var(--accent3); border: 1px solid rgba(52,211,153,0.2); }
 .pub-type.wp { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
 .pub-year {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.72rem;
   color: var(--text3);
 }
@@ -508,7 +505,7 @@ html.light .hero-badge {
   font-size: 0.8rem;
   color: var(--accent);
   margin-top: 0.2rem;
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
 }
 
 /* ─── TOOLS ─── */
@@ -542,7 +539,7 @@ html.light .hero-badge {
 .tool-card:hover::after { opacity: 1; }
 .tool-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
 .tool-name {
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 700; font-size: 1.05rem;
   margin-bottom: 0.5rem;
 }
@@ -554,7 +551,7 @@ html.light .hero-badge {
 }
 .tool-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .stack-tag {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.68rem;
   color: var(--text3);
   background: var(--bg3);
@@ -577,14 +574,14 @@ html.light .hero-badge {
 }
 .course-card:hover { background: var(--card-hover); border-color: var(--border2); }
 .course-num {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.72rem;
   color: var(--accent);
   letter-spacing: 0.08em;
   margin-bottom: 0.5rem;
 }
 .course-name {
-  font-family: 'Syne', sans-serif;
+  font-family: system-ui, sans-serif;
   font-weight: 700; font-size: 0.95rem;
   margin-bottom: 0.4rem;
 }
@@ -592,7 +589,7 @@ html.light .hero-badge {
 .course-level {
   display: inline-block;
   margin-top: 0.75rem;
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.68rem;
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
@@ -619,7 +616,7 @@ html.light .hero-badge {
 .dist-item:hover { background: var(--card-hover); border-color: var(--border2); }
 .dist-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
 .dist-title { font-weight: 500; font-size: 0.9rem; margin-bottom: 0.25rem; }
-.dist-detail { font-size: 0.78rem; color: var(--text2); font-family: 'DM Mono', monospace; }
+.dist-detail { font-size: 0.78rem; color: var(--text2); font-family: ui-monospace, monospace; }
 
 /* ─── CONTACT ─── */
 .contact-inner { max-width: 640px; }
@@ -644,7 +641,7 @@ html.light .hero-badge {
 }
 .contact-link-icon { font-size: 1.25rem; flex-shrink: 0; }
 .contact-link-label {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.72rem;
   color: var(--text3);
   letter-spacing: 0.06em;
@@ -661,7 +658,7 @@ footer {
   flex-wrap: wrap; gap: 1rem;
 }
 .footer-copy, .footer-built {
-  font-family: 'DM Mono', monospace;
+  font-family: ui-monospace, monospace;
   font-size: 0.75rem;
   color: var(--text3);
 }
