@@ -1,40 +1,40 @@
 @import "tailwindcss";
 
-/* ─── CSS VARIABLES ─── */
+/* ─── CSS VARIABLES — University of Manchester palette ─── */
 :root {
-  --bg: #0a0a0f;
-  --bg2: #111118;
-  --bg3: #1a1a25;
+  --bg: #0e0b14;
+  --bg2: #140f20;
+  --bg3: #1e1630;
   --border: rgba(255,255,255,0.06);
   --border2: rgba(255,255,255,0.12);
-  --text: #e8e8f0;
-  --text2: #9898b0;
-  --text3: #5a5a78;
+  --text: #ede8f5;
+  --text2: #a89bc0;
+  --text3: #5e5378;
   --card-bg: rgba(255,255,255,0.03);
   --card-hover: rgba(255,255,255,0.06);
-  --glow: rgba(110,231,247,0.08);
-  --accent: #6ee7f7;
-  --accent2: #a78bfa;
-  --accent3: #34d399;
+  --glow: rgba(192,132,252,0.1);
+  --accent: #c084fc;   /* violet-400 — Manchester purple */
+  --accent2: #fbbf24;  /* amber-400  — Manchester gold   */
+  --accent3: #fb7185;  /* rose-400   — Manchester red    */
   --nav-h: 64px;
   --radius: 12px;
 }
 
 html.light {
-  --bg: #f8f9fc;
-  --bg2: #f0f2f7;
-  --bg3: #e8ecf5;
-  --border: #d0d5e8;
-  --border2: #b8c0d8;
-  --text: #0f1623;
-  --text2: #2a3450;
-  --text3: #6b7a99;
+  --bg: #faf8fc;
+  --bg2: #f3eef9;
+  --bg3: #ebe0f5;
+  --border: #d5c7eb;
+  --border2: #bfaedd;
+  --text: #1a0f2e;
+  --text2: #3d2b6b;
+  --text3: #7b6a9a;
   --card-bg: rgba(255,255,255,0.95);
   --card-hover: #ffffff;
-  --glow: rgba(8,145,178,0.1);
-  --accent: #0891b2;
-  --accent2: #7c3aed;
-  --accent3: #059669;
+  --glow: rgba(124,58,237,0.08);
+  --accent: #7c3aed;   /* violet-700 */
+  --accent2: #b45309;  /* amber-700  */
+  --accent3: #be123c;  /* rose-700   */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,7 +47,7 @@ body {
 }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #111118; }
+::-webkit-scrollbar-track { background: #140f20; }
 ::-webkit-scrollbar-thumb { background: #2a2a3a; border-radius: 3px; }
 html.light ::-webkit-scrollbar-track { background: #f0f2f7; }
 html.light ::-webkit-scrollbar-thumb { background: #b8c0d8; }
@@ -58,7 +58,7 @@ a { color: inherit; text-decoration: none; }
 nav {
   position: fixed; top: 0; left: 0; right: 0;
   height: var(--nav-h);
-  background: rgba(10,10,15,0.85);
+  background: rgba(14,11,20,0.85);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
@@ -67,7 +67,7 @@ nav {
   transition: background 0.3s;
 }
 html.light nav {
-  background: rgba(248,249,252,0.9);
+  background: rgba(250,248,252,0.9);
 }
 .nav-logo {
   font-family: system-ui, sans-serif;
@@ -185,8 +185,8 @@ section:nth-child(even) { background: var(--bg2); }
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 20% 50%, rgba(110,231,247,0.05) 0%, transparent 60%),
-              radial-gradient(ellipse at 80% 20%, rgba(167,139,250,0.05) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 20% 50%, rgba(192,132,252,0.07) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(251,191,36,0.05) 0%, transparent 50%);
   pointer-events: none;
 }
 .hero-grid {
@@ -207,15 +207,15 @@ html.light .hero-grid {
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: var(--accent);
-  background: rgba(110,231,247,0.08);
-  border: 1px solid rgba(110,231,247,0.2);
+  background: rgba(192,132,252,0.08);
+  border: 1px solid rgba(192,132,252,0.25);
   padding: 0.4rem 1rem;
   border-radius: 999px;
   margin-bottom: 2rem;
 }
 html.light .hero-badge {
-  background: rgba(8,145,178,0.08);
-  border-color: rgba(8,145,178,0.2);
+  background: rgba(124,58,237,0.08);
+  border-color: rgba(124,58,237,0.2);
 }
 .hero-name {
   font-family: system-ui, sans-serif;
@@ -412,9 +412,9 @@ html.light .hero-badge {
 .tag {
   font-family: ui-monospace, monospace;
   font-size: 0.72rem;
-  color: var(--accent2);
-  background: rgba(167,139,250,0.08);
-  border: 1px solid rgba(167,139,250,0.15);
+  color: var(--accent);
+  background: rgba(192,132,252,0.08);
+  border: 1px solid rgba(192,132,252,0.18);
   padding: 0.3rem 0.8rem;
   border-radius: 999px;
   letter-spacing: 0.04em;
@@ -480,10 +480,10 @@ html.light .hero-badge {
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
 }
-.pub-type.wos { background: rgba(110,231,247,0.1); color: var(--accent); border: 1px solid rgba(110,231,247,0.2); }
-.pub-type.scopus { background: rgba(167,139,250,0.1); color: var(--accent2); border: 1px solid rgba(167,139,250,0.2); }
-.pub-type.chapter { background: rgba(52,211,153,0.1); color: var(--accent3); border: 1px solid rgba(52,211,153,0.2); }
-.pub-type.wp { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+.pub-type.wos { background: rgba(192,132,252,0.1); color: var(--accent); border: 1px solid rgba(192,132,252,0.25); }
+.pub-type.scopus { background: rgba(251,191,36,0.1); color: var(--accent2); border: 1px solid rgba(251,191,36,0.25); }
+.pub-type.chapter { background: rgba(251,113,133,0.1); color: var(--accent3); border: 1px solid rgba(251,113,133,0.25); }
+.pub-type.wp { background: rgba(251,113,133,0.08); color: var(--accent3); border: 1px solid rgba(251,113,133,0.2); }
 .pub-year {
   font-family: ui-monospace, monospace;
   font-size: 0.72rem;
@@ -594,10 +594,10 @@ html.light .hero-badge {
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
 }
-.level-phd { background: rgba(167,139,250,0.1); color: var(--accent2); }
-.level-mba { background: rgba(110,231,247,0.1); color: var(--accent); }
-.level-ug { background: rgba(52,211,153,0.1); color: var(--accent3); }
-.level-exec { background: rgba(251,191,36,0.1); color: #fbbf24; }
+.level-phd { background: rgba(192,132,252,0.1); color: var(--accent); }
+.level-mba { background: rgba(251,191,36,0.1); color: var(--accent2); }
+.level-ug { background: rgba(251,113,133,0.1); color: var(--accent3); }
+.level-exec { background: rgba(251,191,36,0.12); color: var(--accent2); }
 
 /* ─── DISTINCTIONS ─── */
 .dist-grid {

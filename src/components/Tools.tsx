@@ -56,24 +56,24 @@ export default function Tools() {
           href="https://ml-ai-portal.vercel.app"
           target="_blank"
           rel="noreferrer"
-          style={{ display: 'block', borderColor: 'var(--accent)', background: 'linear-gradient(135deg,rgba(110,231,247,0.06),var(--card-bg))' }}
+          style={{ display: 'block', borderColor: 'var(--accent)', background: 'linear-gradient(135deg,rgba(192,132,252,0.07),var(--card-bg))' }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
             <span style={{ fontSize: '2rem' }}>🚀</span>
             <div>
               <div className="tool-name" style={{ margin: 0 }}>{t('toolHubName')}</div>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '0.7rem', color: 'var(--accent)', marginTop: '0.15rem' }}>
+              <div style={{ fontFamily: 'ui-monospace, monospace', fontSize: '0.7rem', color: 'var(--accent)', marginTop: '0.15rem' }}>
                 ml-ai-portal.vercel.app
               </div>
             </div>
-            <span style={{ marginLeft: 'auto', fontFamily: "'DM Mono', monospace", fontSize: '0.7rem', color: '#000', background: 'var(--accent)', padding: '0.2rem 0.7rem', borderRadius: '4px', fontWeight: 700, flexShrink: 0 }}>HUB</span>
+            <span style={{ marginLeft: 'auto', fontFamily: 'ui-monospace, monospace', fontSize: '0.7rem', color: '#fff', background: 'var(--accent)', padding: '0.2rem 0.7rem', borderRadius: '4px', fontWeight: 700, flexShrink: 0 }}>HUB</span>
           </div>
           <div className="tool-desc">{t('toolHubDesc')}</div>
           <div className="tool-stack">
             <span className="stack-tag">TypeScript</span>
             <span className="stack-tag">React</span>
             <span className="stack-tag">Vercel</span>
-            <span className="stack-tag" style={{ color: 'var(--accent3)', background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.2)' }}>{t('tagNew')}</span>
+            <span className="stack-tag" style={{ color: 'var(--accent3)', background: 'rgba(192,132,252,0.1)', border: '1px solid rgba(192,132,252,0.2)' }}>{t('tagNew')}</span>
           </div>
         </a>
       </div>
@@ -94,7 +94,7 @@ export default function Tools() {
             <div className="tool-stack">
               {tool.tags.map(tag => <span key={tag} className="stack-tag">{tag}</span>)}
               {tool.accentTag && (
-                <span className="stack-tag" style={{ color: 'var(--accent3)', background: 'rgba(52,211,153,0.1)' }}>{t('tagNew')}</span>
+                <span className="stack-tag" style={{ color: 'var(--accent3)', background: 'rgba(192,132,252,0.1)' }}>{t('tagNew')}</span>
               )}
             </div>
           </a>
