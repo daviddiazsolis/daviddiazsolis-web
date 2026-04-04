@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David Díaz Solís — AI · Analytics · Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── CSS VARIABLES ─── */
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #1a1a25;
+      --border: rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
+      --text: #e8e8f0;
+      --text2: #9090a8;
+      --text3: #5a5a72;
+      --accent: #6ee7f7;
+      --accent2: #a78bfa;
+      --accent3: #34d399;
+      --glow: rgba(110,231,247,0.15);
+      --tag-bg: rgba(110,231,247,0.08);
+      --card-bg: rgba(255,255,255,0.03);
+      --card-hover: rgba(255,255,255,0.06);
+      --shadow: 0 4px 32px rgba(0,0,0,0.4);
+      --radius: 12px;
+      --nav-h: 64px;
+    }
+    [data-theme="light"] {
+      --bg: #f5f5fa;
+      --bg2: #ebebf5;
+      --bg3: #e0e0ee;
+      --border: rgba(0,0,0,0.07);
+      --border2: rgba(0,0,0,0.12);
+      --text: #1a1a2e;
+      --text2: #4a4a6a;
+      --text3: #8a8aaa;
+      --accent: #0891b2;
+      --accent2: #7c3aed;
+      --accent3: #059669;
+      --glow: rgba(8,145,178,0.1);
+      --tag-bg: rgba(8,145,178,0.08);
+      --card-bg: rgba(255,255,255,0.7);
+      --card-hover: rgba(255,255,255,0.9);
+      --shadow: 0 4px 32px rgba(0,0,0,0.08);
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: var(--accent); color: #000; }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    [data-theme="light"] nav { background: rgba(245,245,250,0.85); }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text2);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); opacity: 1; }
+
+    .nav-controls { display: flex; gap: 0.75rem; align-items: center; }
+
+    .btn-control {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.05em;
+    }
+    .btn-control:hover {
+      background: var(--border2);
+      color: var(--text);
+    }
+    .btn-control.active {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text2); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: calc(var(--nav-h) + 3rem) clamp(1.5rem, 5vw, 4rem) 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(110,231,247,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(167,139,250,0.05) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.03;
+      background-image:
+        linear-gradient(var(--text) 1px, transparent 1px),
+        linear-gradient(90deg, var(--text) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      background: var(--tag-bg);
+      border: 1px solid rgba(110,231,247,0.2);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.06em;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-name em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--text2);
+      margin-bottom: 1.75rem;
+      line-height: 1.8;
+    }
+    .hero-title strong { color: var(--text); font-weight: 400; }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text2);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-links {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px var(--glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border2);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover {
+      background: var(--card-hover);
+      transform: translateY(-1px);
+    }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.2rem;
+    }
+
+    .hero-visual { position: relative; z-index: 1; }
+
+    .hero-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .profile-header {
+      display: flex; align-items: center; gap: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+    .profile-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #000;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .profile-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .profile-info h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .profile-info p {
+      font-size: 0.8rem;
+      color: var(--text2);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .affil-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+    .affil-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--text2);
+    }
+    .affil-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent3);
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .hero-external-links {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .ext-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text2);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .ext-link:hover {
+      background: var(--tag-bg);
+      border-color: var(--accent);
+      color: var(--accent);
+      opacity: 1;
+    }
+
+    /* ─── SECTION COMMON ─── */
+    section { padding: 6rem clamp(1.5rem, 5vw, 4rem); }
+    section:nth-child(even) { background: var(--bg2); }
+
+    .section-header { margin-bottom: 3.5rem; }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text2);
+      margin-top: 0.75rem;
+      max-width: 560px;
+    }
+
+    /* ─── ABOUT ─── */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--text2);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+      font-size: 0.97rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--text); font-weight: 500; }
+
+    .credentials-list {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .cred-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      transition: all 0.2s;
+    }
+    .cred-item:hover {
+      background: var(--card-hover);
+      border-color: var(--border2);
+    }
+    .cred-degree {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .cred-school {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .tags-cloud {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 2rem;
+    }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent2);
+      background: rgba(167,139,250,0.08);
+      border: 1px solid rgba(167,139,250,0.15);
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── RESEARCH ─── */
+    #research .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    .pub-list {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .pub-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pub-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.25s;
+      transform-origin: bottom;
+    }
+    .pub-item:hover {
+      background: var(--card-hover);
+      border-color: var(--border2);
+      transform: translateX(4px);
+    }
+    .pub-item:hover::before { transform: scaleY(1); }
+
+    .pub-meta {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .pub-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-weight: 400;
+    }
+    .pub-type.wos { background: rgba(110,231,247,0.1); color: var(--accent); border: 1px solid rgba(110,231,247,0.2); }
+    .pub-type.scopus { background: rgba(167,139,250,0.1); color: var(--accent2); border: 1px solid rgba(167,139,250,0.2); }
+    .pub-type.chapter { background: rgba(52,211,153,0.1); color: var(--accent3); border: 1px solid rgba(52,211,153,0.2); }
+    .pub-type.book { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+    .pub-type.wp { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+
+    .pub-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text3);
+    }
+
+    .pub-title {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 0.35rem;
+    }
+    .pub-authors {
+      font-size: 0.8rem;
+      color: var(--text3);
+      font-style: italic;
+    }
+    .pub-journal {
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 0.2rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ─── TOOLS ─── */
+    #tools .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .tool-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .tool-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--glow), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tool-card:hover {
+      background: var(--card-hover);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px var(--glow);
+    }
+    .tool-card:hover::after { opacity: 1; }
+
+    .tool-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .tool-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+    .tool-desc {
+      font-size: 0.85rem;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+    .tool-stack {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .stack-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--text3);
+      background: var(--bg3);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    /* ─── TEACHING ─── */
+    #teaching .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .course-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: all 0.2s;
+    }
+    .course-card:hover {
+      background: var(--card-hover);
+      border-color: var(--border2);
+    }
+    .course-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .course-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+    }
+    .course-prog {
+      font-size: 0.78rem;
+      color: var(--text2);
+    }
+    .course-level {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+    .level-phd { background: rgba(167,139,250,0.1); color: var(--accent2); }
+    .level-mba { background: rgba(110,231,247,0.1); color: var(--accent); }
+    .level-ug { background: rgba(52,211,153,0.1); color: var(--accent3); }
+    .level-exec { background: rgba(251,191,36,0.1); color: #fbbf24; }
+
+    /* ─── DISTINCTIONS ─── */
+    #distinctions .dist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.25rem;
+    }
+    .dist-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: all 0.2s;
+    }
+    .dist-item:hover {
+      background: var(--card-hover);
+      border-color: var(--border2);
+    }
+    .dist-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .dist-content {}
+    .dist-title {
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+    .dist-detail {
+      font-size: 0.78rem;
+      color: var(--text2);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: var(--bg);
+    }
+    .contact-inner {
+      max-width: 640px;
+    }
+    .contact-desc {
+      color: var(--text2);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .contact-links {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .contact-link-item {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      transition: all 0.2s;
+      color: var(--text);
+    }
+    .contact-link-item:hover {
+      background: var(--card-hover);
+      border-color: var(--accent);
+      opacity: 1;
+      transform: translateX(4px);
+    }
+    .contact-link-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .contact-link-text {}
+    .contact-link-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text3);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.1rem;
+    }
+    .contact-link-value {
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2rem clamp(1.5rem, 5vw, 4rem);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text3);
+    }
+    .footer-built {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text3);
+    }
+    .footer-built span { color: var(--accent); }
+
+    /* ─── MOBILE NAV ─── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text2);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { display: none; }
+      #about .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .hero-stats { gap: 1.5rem; }
+      .stat-num { font-size: 1.5rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── HIDDEN pub items for filter ─── */
+    .pub-item.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-logo">David<span>.</span>Díaz</div>
+
+  <ul class="nav-links">
+    <li><a href="#about" data-es="Sobre mí" data-en="About">Sobre mí</a></li>
+    <li><a href="#research" data-es="Investigación" data-en="Research">Investigación</a></li>
+    <li><a href="#tools" data-es="Herramientas" data-en="Tools">Herramientas</a></li>
+    <li><a href="#teaching" data-es="Docencia" data-en="Teaching">Docencia</a></li>
+    <li><a href="#media" data-es="Medios" data-en="Media">Medios</a></li>
+    <li><a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
+  </ul>
+
+  <div class="nav-controls">
+    <button class="btn-control active" id="btn-es" onclick="setLang('es')">ES</button>
+    <button class="btn-control" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="btn-control" id="btn-theme" onclick="toggleTheme()">☀</button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()" data-es="Sobre mí" data-en="About">Sobre mí</a>
+  <a href="#research" onclick="closeMenu()" data-es="Investigación" data-en="Research">Investigación</a>
+  <a href="#tools" onclick="closeMenu()" data-es="Herramientas" data-en="Tools">Herramientas</a>
+  <a href="#teaching" onclick="closeMenu()" data-es="Docencia" data-en="Teaching">Docencia</a>
+  <a href="#media" onclick="closeMenu()" data-es="Medios" data-en="Media">Medios</a>
+  <a href="#contact" onclick="closeMenu()" data-es="Contacto" data-en="Contact">Contacto</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge" data-es="Profesor Asociado · FEN Universidad de Chile" data-en="Associate Professor · FEN Universidad de Chile">
+      Profesor Asociado · FEN Universidad de Chile
+    </div>
+
+    <h1 class="hero-name">David<br><em>Díaz</em> Solís</h1>
+
+    <div class="hero-title">
+      <strong>Ph.D. Business Intelligence</strong> · University of Manchester<br>
+      <span data-es="IA aplicada · Analítica de Negocios · Machine Learning" data-en="Applied AI · Business Analytics · Machine Learning">IA aplicada · Analítica de Negocios · Machine Learning</span>
+    </div>
+
+    <p class="hero-desc" data-es="Investigador en la intersección de machine learning, analítica de servicios y decisiones financieras. Más de dos décadas aplicando IA a problemas reales en negocios, finanzas y estrategia digital." data-en="Researcher at the intersection of machine learning, service analytics and financial decision-making. Over two decades applying AI to real-world challenges in business, finance and digital strategy.">
+      Investigador en la intersección de machine learning, analítica de servicios y decisiones financieras. Más de dos décadas aplicando IA a problemas reales en negocios, finanzas y estrategia digital.
+    </p>
+
+    <div class="hero-links">
+      <a class="btn-primary" href="#research" data-es="Ver Publicaciones" data-en="View Publications">Ver Publicaciones</a>
+      <a class="btn-outline" href="#tools" data-es="Explorar Tools" data-en="Explore Tools">Explorar Tools</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">20<span>+</span></div>
+        <div class="stat-label" data-es="Papers WoS/Scopus" data-en="WoS/Scopus Papers">Papers WoS/Scopus</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1.7<span>k+</span></div>
+        <div class="stat-label" data-es="Citas Google Scholar" data-en="Google Scholar Citations">Citas Google Scholar</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">20<span>+</span></div>
+        <div class="stat-label" data-es="Años en IA/ML" data-en="Years in AI/ML">Años en IA/ML</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <img src="https://alumni.fen.uchile.cl/uploads/noticia/medium_5ea9c504ce7177df1923971323277640bf3909d6.jpg" alt="David Díaz Solís" onerror="this.parentElement.innerHTML='DDS'" />
+        </div>
+        <div class="profile-info">
+          <h3>David Díaz Solís</h3>
+          <p>@daviddiazsolis</p>
+        </div>
+      </div>
+      <ul class="affil-list">
+        <li class="affil-item"><span class="affil-dot"></span><span data-es="Profesor Asociado, Depto. Administración, FEN U. de Chile" data-en="Associate Professor, Dept. of Administration, FEN U. de Chile">Profesor Asociado, Depto. Administración, FEN U. de Chile</span></li>
+        <li class="affil-item"><span class="affil-dot"></span><span data-es="Co-Director Magíster en Analítica de Negocios — MIT/UCHILE" data-en="Co-Director MSc Business Analytics — MIT/UCHILE">Co-Director Magíster en Analítica de Negocios — MIT/UCHILE</span></li>
+        <li class="affil-item"><span class="affil-dot"></span><span data-es="Research Collaborator, Cambridge Service Alliance, U. of Cambridge" data-en="Research Collaborator, Cambridge Service Alliance, U. of Cambridge">Research Collaborator, Cambridge Service Alliance, U. of Cambridge</span></li>
+        <li class="affil-item"><span class="affil-dot"></span><span data-es="Director Observatorio de IA e Innovación, FEN U. de Chile" data-en="Director AI & Innovation Observatory, FEN U. de Chile">Director Observatorio de IA e Innovación, FEN U. de Chile</span></li>
+        <li class="affil-item"><span class="affil-dot"></span><span data-es="Presidente Comité IA, AmCham Chile (2021–)" data-en="President AI Committee, AmCham Chile (2021–)">Presidente Comité IA, AmCham Chile (2021–)</span></li>
+      </ul>
+      <div class="hero-external-links">
+        <a class="ext-link" href="https://scholar.google.com/citations?user=6m3sR_oAAAAJ" target="_blank">Google Scholar</a>
+        <a class="ext-link" href="https://orcid.org/0000-0001-7149-0535" target="_blank">ORCID</a>
+        <a class="ext-link" href="https://github.com/daviddiazsolis" target="_blank">GitHub</a>
+        <a class="ext-link" href="https://www.linkedin.com/in/david-diaz-s-phd-71430622/" target="_blank">LinkedIn</a>
+        <a class="ext-link" href="https://cambridgeservicealliance.eng.cam.ac.uk/staff/dr-david-diaz" target="_blank">Cambridge</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="section-header fade-in">
+    <div class="section-label" data-es="// 01 — sobre mí" data-en="// 01 — about">// 01 — sobre mí</div>
+    <h2 class="section-title" data-es="Académico, Investigador<br>& Constructor de IA" data-en="Academic, Researcher<br>& AI Builder">Académico, Investigador<br>& Constructor de IA</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p data-es="Soy <strong>Profesor Asociado</strong> en el Departamento de Administración de la Facultad de Economía y Negocios de la Universidad de Chile, con especialización en Business Intelligence, IA aplicada y Data Analytics." data-en="I am an <strong>Associate Professor</strong> at the Department of Administration, Faculty of Economics and Business, Universidad de Chile, specializing in Business Intelligence, Applied AI and Data Analytics.">
+        Soy <strong>Profesor Asociado</strong> en el Departamento de Administración de la Facultad de Economía y Negocios de la Universidad de Chile, con especialización en Business Intelligence, IA aplicada y Data Analytics.
+      </p>
+      <p data-es="Mi investigación se sitúa en la intersección entre <strong>machine learning, analítica de servicios y toma de decisiones financieras</strong>. Con más de 20 artículos en revistas WoS y Scopus, capítulos de libros y presentaciones internacionales, contribuyo activamente al campo desde Latinoamérica hacia audiencias globales." data-en="My research sits at the intersection of <strong>machine learning, service analytics and financial decision-making</strong>. With over 20 articles in WoS and Scopus journals, book chapters and international presentations, I actively contribute to the field from Latin America for global audiences.">
+        Mi investigación se sitúa en la intersección entre <strong>machine learning, analítica de servicios y toma de decisiones financieras</strong>. Con más de 20 artículos en revistas WoS y Scopus, capítulos de libros y presentaciones internacionales, contribuyo activamente al campo desde Latinoamérica hacia audiencias globales.
+      </p>
+      <p data-es="También dirijo el <strong>Programa Data Analytics Certificate</strong> (joint MIT Sloan/FCFM) y el MBA Evening, y actúo como asesor para el Banco Interamericano de Desarrollo, HSBC y el Banco Mundial." data-en="I also direct the <strong>Data Analytics Certificate Programme</strong> (joint MIT Sloan/FCFM) and the MBA Evening, and advise institutions including the Inter-American Development Bank, HSBC and the World Bank.">
+        También dirijo el <strong>Programa Data Analytics Certificate</strong> (joint MIT Sloan/FCFM) y el MBA Evening, y actúo como asesor para el Banco Interamericano de Desarrollo, HSBC y el Banco Mundial.
+      </p>
+      <div class="tags-cloud">
+        <span class="tag">Generative AI</span>
+        <span class="tag">Credit Scoring</span>
+        <span class="tag">NLP / Deep Learning</span>
+        <span class="tag">Service Analytics</span>
+        <span class="tag">Causal Inference</span>
+        <span class="tag">XAI</span>
+        <span class="tag">Financial ML</span>
+        <span class="tag">Customer Experience</span>
+        <span class="tag">LLMs</span>
+      </div>
+    </div>
+    <div class="credentials-list fade-in">
+      <div class="cred-item">
+        <div class="cred-degree">Ph.D. in Business Intelligence</div>
+        <div class="cred-school">University of Manchester · Alliance Manchester Business School</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-degree" data-es="Magíster en Finanzas" data-en="Master's in Finance">Magíster en Finanzas</div>
+        <div class="cred-school">Universidad de Chile · Santiago</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-degree" data-es="Ingeniero Comercial" data-en="Business Engineer (Ingeniero Comercial)">Ingeniero Comercial</div>
+        <div class="cred-school">Universidad de Chile · Santiago</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-degree">Visiting Researcher</div>
+        <div class="cred-school">Cambridge Service Alliance · University of Cambridge</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-degree">Visiting Researcher</div>
+        <div class="cred-school">Aristotle University of Thessaloniki · Data Engineering Lab</div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-degree">Honorary Research Fellow</div>
+        <div class="cred-school">The University of Manchester · Manchester Business School</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESEARCH ─── -->
+<section id="research">
+  <div class="section-header fade-in">
+    <div class="section-label" data-es="// 02 — investigación" data-en="// 02 — research">// 02 — investigación</div>
+    <h2 class="section-title" data-es="Publicaciones<br>& Working Papers" data-en="Publications<br>& Working Papers">Publicaciones<br>& Working Papers</h2>
+    <p class="section-subtitle" data-es="Publicaciones seleccionadas 2006–2026. Lista completa en Google Scholar." data-en="Selected publications 2006–2026. Full list on Google Scholar.">Publicaciones seleccionadas 2006–2026. Lista completa en Google Scholar.</p>
+  </div>
+
+  <div class="filter-bar fade-in">
+    <button class="filter-btn active" onclick="filterPubs('all')" data-es="Todos" data-en="All">Todos</button>
+    <button class="filter-btn" onclick="filterPubs('wos')" data-es="Journal WoS/ISI" data-en="WoS/ISI Journal">Journal WoS/ISI</button>
+    <button class="filter-btn" onclick="filterPubs('scopus')">Scopus</button>
+    <button class="filter-btn" onclick="filterPubs('chapter')" data-es="Capítulos" data-en="Book Chapters">Capítulos</button>
+    <button class="filter-btn" onclick="filterPubs('wp')" data-es="Working Papers" data-en="Working Papers">Working Papers</button>
+  </div>
+
+  <div class="pub-list fade-in">
+
+    <!-- 2026 -->
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2026</span></div>
+      <div class="pub-title">AI agents in service experience: towards autonomous and conscious agency</div>
+      <div class="pub-authors">Shaikh, M., Joseph, A., Zhao, H., Al Assadi, A., Bluemel, J. H., Diaz, D., & Zaki, M.</div>
+      <div class="pub-journal">Journal of Service Management, 1–24, 2026</div>
+    </div>
+
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2026</span></div>
+      <div class="pub-title">"From retirement to entrepreneurship": profiles and challenges of older entrepreneurs. Do gender and social orientation matter?</div>
+      <div class="pub-authors">Espinoza-Benavides, J., Yañez-Valdés, C., Díaz, D., & Ribeiro-Soriano, D.</div>
+      <div class="pub-journal">International Entrepreneurship and Management Journal 22(2), 68, 2026</div>
+    </div>
+
+    <!-- 2024 -->
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2024</span></div>
+      <div class="pub-title">Exploring gender stereotypes in financial reporting: An aspect-level sentiment analysis using big data and deep learning</div>
+      <div class="pub-authors">Jeldes-Delgado, F., Ferreira, T. A., Diaz, D., & Ortiz, R.</div>
+      <div class="pub-journal">Heliyon 10(20), 2024</div>
+    </div>
+
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2024</span></div>
+      <div class="pub-title">Does facial structure explain differences in student evaluations of teaching? The role of fWHR as a proxy for perceived dominance</div>
+      <div class="pub-authors">Paredes, V., Pino, F. J., & Díaz, D.</div>
+      <div class="pub-journal">Economics & Human Biology 54, 101381, 2024</div>
+    </div>
+
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2024</span></div>
+      <div class="pub-title">Ensemble approach using k-partitioned isolation forests for the detection of stock market manipulation</div>
+      <div class="pub-authors">Núñez Delafuente, H., Astudillo, C. A., & Díaz, D.</div>
+      <div class="pub-journal">Mathematics 12(9), 1336, 2024</div>
+    </div>
+
+    <!-- 2021 -->
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2021</span></div>
+      <div class="pub-title">Dissecting the ecosystems' determinants of entrepreneurial re-entry after a business failure</div>
+      <div class="pub-authors">Espinoza-Benavides, J., Guerrero, M., & Díaz, D.</div>
+      <div class="pub-journal">European Business Review 33(6), 975–998, 2021</div>
+    </div>
+
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2021</span></div>
+      <div class="pub-title">The role of pension knowledge in voluntary pension and banking savings in Chile</div>
+      <div class="pub-authors">Diaz, D., Ruiz, J. L., & Tapia, P.</div>
+      <div class="pub-journal">Academia Revista Latinoamericana de Administración 34(4), 545–560, 2021</div>
+    </div>
+
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2021</span></div>
+      <div class="pub-title">The strong need for extended research and replications in Latin American and emerging markets</div>
+      <div class="pub-authors">Olavarrieta, S., & Diaz, D.</div>
+      <div class="pub-journal">Journal of Business Research 127, 384–388, 2021</div>
+    </div>
+
+    <div class="pub-item" data-type="scopus">
+      <div class="pub-meta"><span class="pub-type scopus">Scopus</span><span class="pub-year">2021</span></div>
+      <div class="pub-title">Premio de Investigación SCHOT 2020: desarrollo y validación de un modelo multivariables de predicción de estadía hospitalaria en pacientes mayores de 65 años sometidos a artroplastia total de cadera</div>
+      <div class="pub-authors">Díaz-Ledezma, C., Díaz-Solís, D., Muñoz-Reyes, R., Torres Castro, J.</div>
+      <div class="pub-journal">Revista Chilena de Ortopedia y Traumatología 62(03), e180–e192, 2021</div>
+    </div>
+
+    <!-- 2020 -->
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2020</span></div>
+      <div class="pub-title">The male warrior hypothesis: Testosterone-related cooperation and aggression in the context of intergroup conflict</div>
+      <div class="pub-authors">Muñoz-Reyes, J. A., Polo, P., Valenzuela, N., Pavez, P., Ramírez-Herrera, O., ..., Díaz, D., et al.</div>
+      <div class="pub-journal">Scientific Reports 10(1), 375, 2020</div>
+    </div>
+
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2020</span></div>
+      <div class="pub-title">Testing strategic pluralism: The roles of attractiveness and competitive abilities to understand conditionality in men's short-term reproductive strategies</div>
+      <div class="pub-authors">Figueroa, O., Muñoz-Reyes, J. A., Rodriguez-Sickert, C., Valenzuela, N., ..., Díaz, D., et al.</div>
+      <div class="pub-journal">PloS One 15(8), e0237315, 2020</div>
+    </div>
+
+    <!-- 2019 -->
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2019</span></div>
+      <div class="pub-title">The entrepreneurial profile after failure</div>
+      <div class="pub-authors">Espinoza-Benavides, J., & Díaz, D.</div>
+      <div class="pub-journal">International Journal of Entrepreneurial Behavior & Research 25(8), 1634–1651, 2019</div>
+    </div>
+
+    <!-- 2018 -->
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2018</span></div>
+      <div class="pub-title">Does facial structure predict academic performance?</div>
+      <div class="pub-authors">Kausel, E. E., Ventura, S., Díaz, D., & Vicencio, F.</div>
+      <div class="pub-journal">Personality and Individual Differences 129, 1–5, 2018</div>
+    </div>
+
+    <div class="pub-item" data-type="scopus">
+      <div class="pub-meta"><span class="pub-type scopus">Scopus</span><span class="pub-year">2018</span></div>
+      <div class="pub-title">A bibliometric analysis of venture capital research</div>
+      <div class="pub-authors">Cancino, C. A., Merigo, J. M., Torres, J. P., & Diaz, D.</div>
+      <div class="pub-journal">Journal of Economics, Finance and Administrative Science 23(45), 182–195, 2018</div>
+    </div>
+
+    <!-- 2017 -->
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2017</span></div>
+      <div class="pub-title">Exploring corporate social responsibility and financial performance through stakeholder theory in the tourism industries</div>
+      <div class="pub-authors">Theodoulidis, B., Diaz, D., Crotto, F., & Rancati, E.</div>
+      <div class="pub-journal">Tourism Management 62, 173–188, 2017</div>
+    </div>
+
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2017</span></div>
+      <div class="pub-title">Customer engagement in a big data world</div>
+      <div class="pub-authors">Kunz, W., Aksoy, L., Bart, Y., Heinonen, K., Kabadayi, S., ..., Sigala, M., et al.</div>
+      <div class="pub-journal">Journal of Services Marketing 31(2), 161–171, 2017</div>
+    </div>
+
+    <!-- 2016 -->
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2016</span></div>
+      <div class="pub-title">Modelling and forecasting interest rates during stages of the economic cycle: A knowledge-discovery approach</div>
+      <div class="pub-authors">Diaz, D., Theodoulidis, B., & Dupouy, C.</div>
+      <div class="pub-journal">Expert Systems with Applications 44, 245–264, 2016</div>
+    </div>
+
+    <!-- 2011 -->
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2011</span></div>
+      <div class="pub-title">Analysis of stock market manipulations using knowledge discovery techniques applied to intraday trade prices</div>
+      <div class="pub-authors">Diaz, D., Theodoulidis, B., & Sampaio, P.</div>
+      <div class="pub-journal">Expert Systems with Applications 38(10), 12757–12771, 2011</div>
+    </div>
+
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2011</span></div>
+      <div class="pub-title">"Stock-touting" through spam e-mails: a data mining case study</div>
+      <div class="pub-authors">Zaki, M., Theodoulidis, B., & Díaz Solís, D.</div>
+      <div class="pub-journal">Journal of Manufacturing Technology Management 22(6), 770–787, 2011</div>
+    </div>
+
+    <!-- 2008 -->
+    <div class="pub-item" data-type="wos">
+      <div class="pub-meta"><span class="pub-type wos">WoS</span><span class="pub-year">2008</span></div>
+      <div class="pub-title">Forecasting gold price changes: Rolling and recursive neural network models</div>
+      <div class="pub-authors">Parisi, A., Parisi, F., & Díaz, D.</div>
+      <div class="pub-journal">Journal of Multinational Financial Management 18(5), 477–487, 2008</div>
+    </div>
+
+    <!-- 2006 -->
+    <div class="pub-item" data-type="scopus">
+      <div class="pub-meta"><span class="pub-type scopus">Scopus</span><span class="pub-year">2006</span></div>
+      <div class="pub-title">Modelos de algoritmos genéticos y redes neuronales en la predicción de índices bursátiles asiáticos</div>
+      <div class="pub-authors">Parisi, A., Parisi, F., & Díaz, D.</div>
+      <div class="pub-journal">Cuadernos de Economía 43(128), 251–284, 2006</div>
+    </div>
+
+    <!-- Book chapters -->
+    <div class="pub-item" data-type="chapter">
+      <div class="pub-meta"><span class="pub-type chapter" data-es="Capítulo" data-en="Chapter">Capítulo</span><span class="pub-year">2025</span></div>
+      <div class="pub-title">How service experience can shape customer churn from a Service-Dominant Logic perspective</div>
+      <div class="pub-authors">Martínez, C., & Díaz, D.</div>
+      <div class="pub-journal">Handbook of Service Experience. Edward Elgar Publishing (Kristensson, Witell & Zaki, Eds.)</div>
+    </div>
+
+    <div class="pub-item" data-type="chapter">
+      <div class="pub-meta"><span class="pub-type chapter" data-es="Capítulo" data-en="Chapter">Capítulo</span><span class="pub-year">2022</span></div>
+      <div class="pub-title">Customer experience measurement: Implications for customer loyalty</div>
+      <div class="pub-authors">Villarroel, F., Díaz, D., & Herhausen, D.</div>
+      <div class="pub-journal">Handbook of Research on Customer Loyalty. Edward Elgar Publishing</div>
+    </div>
+
+    <div class="pub-item" data-type="chapter">
+      <div class="pub-meta"><span class="pub-type chapter" data-es="Capítulo" data-en="Chapter">Capítulo</span><span class="pub-year">2019</span></div>
+      <div class="pub-title">Ontology-Driven Framework for Stock Market Monitoring and Surveillance</div>
+      <div class="pub-authors">Zaki, M., Theodoulidis, B., & Diaz, D.</div>
+      <div class="pub-journal">Handbook of Global Financial Markets. World Scientific, ISBN: 978-981-3236-64-6</div>
+    </div>
+
+    <div class="pub-item" data-type="chapter">
+      <div class="pub-meta"><span class="pub-type chapter" data-es="Capítulo" data-en="Chapter">Capítulo</span><span class="pub-year">2012</span></div>
+      <div class="pub-title">Innovation Perspectives of a Personal Financial Services Call Centre</div>
+      <div class="pub-authors">Theodoulidis, B., Strickland, S., & Diaz, D.</div>
+      <div class="pub-journal">Case Studies in Service Innovation. Springer, ISBN: 978-1-4614-1971-6</div>
+    </div>
+
+    <!-- Working papers -->
+    <div class="pub-item" data-type="wp">
+      <div class="pub-meta"><span class="pub-type wp">Working Paper</span><span class="pub-year">2024</span></div>
+      <div class="pub-title">Can Large Language Models Predict Credit Risk? An Empirical Study on Consumer Loans in Chile</div>
+      <div class="pub-authors">Díaz, D., & Beas, D. (with CMF Chile)</div>
+      <div class="pub-journal">EURO 2025 Conference · Workshop in Management Science, Pucón 2025</div>
+    </div>
+
+    <div class="pub-item" data-type="wp">
+      <div class="pub-meta"><span class="pub-type wp">Working Paper</span><span class="pub-year">2023</span></div>
+      <div class="pub-title">Modeling and Predicting the Yield Curve of the Chilean Bond Market Through Multi-Output LSTM</div>
+      <div class="pub-authors">Silvestre-Ponce, C., Diaz, D., & Astudillo, C.</div>
+      <div class="pub-journal">SSRN 4643746</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── TOOLS ─── -->
+<section id="tools">
+  <div class="section-header fade-in">
+    <div class="section-label" data-es="// 03 — herramientas educativas" data-en="// 03 — educational tools">// 03 — herramientas educativas</div>
+    <h2 class="section-title" data-es="Interactive<br>Learning Tools" data-en="Interactive<br>Learning Tools">Interactive<br>Learning Tools</h2>
+    <p class="section-subtitle" data-es="Aplicaciones educativas open-source para aprender ML de forma visual e interactiva." data-en="Open-source educational apps to learn ML visually and interactively.">Aplicaciones educativas open-source para aprender ML de forma visual e interactiva.</p>
+  </div>
+  <!-- Hub portal destacado -->
+  <div style="margin-bottom:1.5rem;" class="fade-in">
+    <a class="tool-card" href="https://ml-ai-portal.vercel.app" target="_blank" style="text-decoration:none;color:inherit;display:block;border-color:var(--accent);background:linear-gradient(135deg,rgba(110,231,247,0.06),var(--card-bg));">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="font-size:2rem;">🚀</span>
+        <div>
+          <div class="tool-name" style="margin:0;" data-es="ML & AI Learning Hub — Portal Central" data-en="ML & AI Learning Hub — Central Portal">ML & AI Learning Hub — Portal Central</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--accent);margin-top:0.15rem;">ml-ai-portal.vercel.app</div>
+        </div>
+        <span style="margin-left:auto;font-family:'DM Mono',monospace;font-size:0.7rem;color:#000;background:var(--accent);padding:0.2rem 0.7rem;border-radius:4px;font-weight:700;flex-shrink:0;">HUB</span>
+      </div>
+      <div class="tool-desc" data-es="Landing central que linkea todos los playgrounds educativos. Incluye timeline interactivo de historia de la IA y directorio de herramientas." data-en="Central landing linking all educational playgrounds. Includes interactive AI history timeline and tools directory.">Landing central que linkea todos los playgrounds educativos. Incluye timeline interactivo de historia de la IA y directorio de herramientas.</div>
+      <div class="tool-stack">
+        <span class="stack-tag">TypeScript</span><span class="stack-tag">Next.js</span><span class="stack-tag">Vercel</span>
+        <span class="stack-tag" style="color:var(--accent3);background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);">⚡ nuevo</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="tools-grid fade-in">
+    <a class="tool-card" href="https://kernel-neural-playground.vercel.app" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">🧠</span>
+      <div class="tool-name">Kernel & Neural Playground</div>
+      <div class="tool-desc" data-es="Explora SVMs con kernels y redes neuronales visualmente. Visualiza fronteras de decisión y el efecto de distintos kernels." data-en="Explore SVMs with kernels and neural networks visually. Visualize decision boundaries and the effect of different kernels.">Explora SVMs con kernels y redes neuronales. Visualiza fronteras de decisión en tiempo real.</div>
+      <div class="tool-stack"><span class="stack-tag">TypeScript</span><span class="stack-tag">Vercel</span><span class="stack-tag" style="color:var(--accent3);background:rgba(52,211,153,0.1);">⚡ nuevo</span></div>
+    </a>
+    <a class="tool-card" href="https://tree-ensemble-playground.vercel.app" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">🌲</span>
+      <div class="tool-name">Tree & Ensemble Playground</div>
+      <div class="tool-desc" data-es="Árboles de decisión, Random Forest y Gradient Boosting de forma visual. Ajusta hiperparámetros y observa el efecto en tiempo real." data-en="Decision trees, Random Forest and Gradient Boosting visually. Adjust hyperparameters and see the effect in real time.">Árboles de decisión, Random Forest y Gradient Boosting. Ajusta hiperparámetros en tiempo real.</div>
+      <div class="tool-stack"><span class="stack-tag">TypeScript</span><span class="stack-tag">Vercel</span><span class="stack-tag" style="color:var(--accent3);background:rgba(52,211,153,0.1);">⚡ nuevo</span></div>
+    </a>
+    <a class="tool-card" href="https://linear-models-playground.vercel.app" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">📈</span>
+      <div class="tool-name">Linear Models Playground</div>
+      <div class="tool-desc" data-es="Regresión lineal, logística y modelos lineales generalizados de forma visual. Introducción interactiva a ML supervisado." data-en="Linear, logistic and generalized linear models visually. Interactive introduction to supervised ML.">Regresión lineal, logística y GLMs de forma visual. Introducción interactiva a ML supervisado.</div>
+      <div class="tool-stack"><span class="stack-tag">TypeScript</span><span class="stack-tag">Vercel</span><span class="stack-tag" style="color:var(--accent3);background:rgba(52,211,153,0.1);">⚡ nuevo</span></div>
+    </a>
+    <a class="tool-card" href="https://evaluation-playground-psi.vercel.app" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">📊</span>
+      <div class="tool-name">Evaluation Playground</div>
+      <div class="tool-desc" data-es="Métricas de evaluación ML interactivas: matrices de confusión, curvas ROC, AUC, precision-recall y validación cruzada." data-en="Interactive ML evaluation metrics: confusion matrices, ROC curves, AUC, precision-recall and cross-validation.">Métricas de evaluación ML: ROC, AUC, matrices de confusión, precision-recall y más.</div>
+      <div class="tool-stack"><span class="stack-tag">TypeScript</span><span class="stack-tag">Vercel</span><span class="stack-tag" style="color:var(--accent3);background:rgba(52,211,153,0.1);">⚡ nuevo</span></div>
+    </a>
+    <a class="tool-card" href="https://pca-playground.vercel.app" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">🔭</span>
+      <div class="tool-name">PCA Playground</div>
+      <div class="tool-desc" data-es="Análisis de Componentes Principales visual. Explora reducción de dimensionalidad, varianza explicada y proyecciones 2D/3D." data-en="Principal Component Analysis visually. Explore dimensionality reduction, explained variance and 2D/3D projections.">PCA visual: reducción de dimensionalidad, varianza explicada y proyecciones 2D/3D.</div>
+      <div class="tool-stack"><span class="stack-tag">TypeScript</span><span class="stack-tag">Vercel</span><span class="stack-tag" style="color:var(--accent3);background:rgba(52,211,153,0.1);">⚡ nuevo</span></div>
+    </a>
+    <a class="tool-card" href="https://autoencoder-embedding-playground.vercel.app" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">🔮</span>
+      <div class="tool-name">Autoencoder Embeddings Playground</div>
+      <div class="tool-desc" data-es="Visualiza cómo los autoencoders crean representaciones comprimidas. Aprende qué son los embeddings de manera interactiva." data-en="Visualize how autoencoders create compressed representations. Learn what embeddings are interactively.">Visualiza cómo los autoencoders crean embeddings. Sitio educativo desplegado en Vercel.</div>
+      <div class="tool-stack"><span class="stack-tag">TypeScript</span><span class="stack-tag">TensorFlow.js</span><span class="stack-tag">Vercel ✓</span></div>
+    </a>
+    <a class="tool-card" href="https://clustering-playground.vercel.app" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">🔵</span>
+      <div class="tool-name">Clustering Playground</div>
+      <div class="tool-desc" data-es="K-Means, DBSCAN y clustering jerárquico visual. Ajusta parámetros y observa cómo se agrupan los datos en tiempo real." data-en="K-Means, DBSCAN and hierarchical clustering visually. Adjust parameters and see data grouping in real time.">K-Means, DBSCAN y clustering jerárquico. Observa cómo se agrupan los datos en tiempo real.</div>
+      <div class="tool-stack"><span class="stack-tag">TypeScript</span><span class="stack-tag">React</span><span class="stack-tag">Vercel</span></div>
+    </a>
+    <a class="tool-card" href="https://association-rules-playground.vercel.app" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">🔗</span>
+      <div class="tool-name">Association Rules Playground</div>
+      <div class="tool-desc" data-es="Apriori y reglas de asociación visuales. Ajusta soporte y confianza y explora las reglas generadas interactivamente." data-en="Apriori and association rules visually. Adjust support and confidence and explore generated rules interactively.">Apriori y reglas de asociación. Ajusta soporte y confianza y explora las reglas generadas.</div>
+      <div class="tool-stack"><span class="stack-tag">TypeScript</span><span class="stack-tag">React</span><span class="stack-tag">Vercel</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/daviddiazsolis/ml_landscape_crispdm" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">🗺️</span>
+      <div class="tool-name">ML Landscape & CRISP-DM</div>
+      <div class="tool-desc" data-es="Mapa interactivo del ecosistema de Machine Learning y la metodología CRISP-DM. Recurso de apoyo para cursos de analítica." data-en="Interactive map of the ML ecosystem and CRISP-DM methodology. Supporting resource for analytics courses.">Mapa interactivo del ecosistema ML y la metodología CRISP-DM.</div>
+      <div class="tool-stack"><span class="stack-tag">TypeScript</span><span class="stack-tag">React</span><span class="stack-tag">Vercel</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/daviddiazsolis/c50py" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">🌳</span>
+      <div class="tool-name">c50py</div>
+      <div class="tool-desc" data-es="Implementación Python del algoritmo C5.0 (árbol de decisión). Librería open-source para clasificación interpretable." data-en="Python implementation of the C5.0 decision tree algorithm. Open-source library for interpretable classification.">Implementación Python del algoritmo de árbol de decisión C5.0. Open-source, GNU GPL.</div>
+      <div class="tool-stack"><span class="stack-tag">Python</span><span class="stack-tag">scikit-learn API</span><span class="stack-tag">GNU GPL</span></div>
+    </a>
+    <a class="tool-card" href="https://github.com/daviddiazsolis/Ayudantias-MIT-UCHILE" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">📚</span>
+      <div class="tool-name">Ayudantías MIT-UChile</div>
+      <div class="tool-desc" data-es="Material de apoyo para el Data Analytics Certificate (MIT Sloan / U. de Chile). Notebooks, datasets y ejercicios prácticos." data-en="Supporting material for the Data Analytics Certificate (MIT Sloan / U. de Chile). Notebooks, datasets and exercises.">Material de apoyo para el Data Analytics Certificate (MIT Sloan / U. de Chile).</div>
+      <div class="tool-stack"><span class="stack-tag">Python</span><span class="stack-tag">Jupyter</span><span class="stack-tag">MIT/UChile</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- ─── TEACHING ─── -->
+<section id="teaching">
+  <div class="section-header fade-in">
+    <div class="section-label" data-es="// 04 — docencia" data-en="// 04 — teaching">// 04 — docencia</div>
+    <h2 class="section-title" data-es="Cursos &<br>Programas" data-en="Courses &<br>Programmes">Cursos &<br>Programas</h2>
+  </div>
+  <div class="courses-grid fade-in">
+    <div class="course-card">
+      <div class="course-num">MBA · FEN</div>
+      <div class="course-name" data-es="Business Intelligence & Analytics" data-en="Business Intelligence & Analytics">Business Intelligence & Analytics</div>
+      <div class="course-prog" data-es="MBA Evening, FEN Universidad de Chile" data-en="MBA Evening, FEN Universidad de Chile">MBA Evening, FEN Universidad de Chile</div>
+      <span class="course-level level-mba">MBA</span>
+    </div>
+    <div class="course-card">
+      <div class="course-num">MAN · MIT/UCHILE</div>
+      <div class="course-name" data-es="Data Analytics Certificate" data-en="Data Analytics Certificate">Data Analytics Certificate</div>
+      <div class="course-prog" data-es="Joint MIT Sloan School · FCFM U. de Chile" data-en="Joint MIT Sloan School · FCFM U. de Chile">Joint MIT Sloan School · FCFM U. de Chile</div>
+      <span class="course-level level-exec">Executive</span>
+    </div>
+    <div class="course-card">
+      <div class="course-num">MBAN · FEN/FCFM</div>
+      <div class="course-name" data-es="Magíster en Analítica de Negocios" data-en="Master in Business Analytics">Magíster en Analítica de Negocios</div>
+      <div class="course-prog" data-es="Co-Director Académico — Joint FEN/FCFM" data-en="Academic Co-Director — Joint FEN/FCFM">Co-Director Académico — Joint FEN/FCFM</div>
+      <span class="course-level level-phd">MSc</span>
+    </div>
+    <div class="course-card">
+      <div class="course-num">PhD · FEN</div>
+      <div class="course-name" data-es="Seminario de Investigación en IA" data-en="AI Research Seminar">Seminario de Investigación en IA</div>
+      <div class="course-prog" data-es="Doctorado en Administración, FEN U. de Chile" data-en="PhD in Administration, FEN U. de Chile">Doctorado en Administración, FEN U. de Chile</div>
+      <span class="course-level level-phd">PhD</span>
+    </div>
+    <div class="course-card">
+      <div class="course-num">MBA · FEN</div>
+      <div class="course-name" data-es="Machine Learning para Negocios" data-en="Machine Learning for Business">Machine Learning para Negocios</div>
+      <div class="course-prog" data-es="MBA Director del Programa, FEN U. de Chile" data-en="MBA Programme Director, FEN U. de Chile">MBA Director del Programa, FEN U. de Chile</div>
+      <span class="course-level level-mba">MBA</span>
+    </div>
+    <div class="course-card">
+      <div class="course-num">PREGRADO · FEN</div>
+      <div class="course-name" data-es="Inteligencia de Negocios" data-en="Business Intelligence">Inteligencia de Negocios</div>
+      <div class="course-prog" data-es="Ingeniería Comercial, FEN U. de Chile" data-en="Business Engineering, FEN U. de Chile">Ingeniería Comercial, FEN U. de Chile</div>
+      <span class="course-level level-ug" data-es="Pregrado" data-en="Undergraduate">Pregrado</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DISTINCTIONS ─── -->
+<section id="distinctions">
+  <div class="section-header fade-in">
+    <div class="section-label" data-es="// 05 — distinciones" data-en="// 05 — distinctions">// 05 — distinciones</div>
+    <h2 class="section-title" data-es="Reconocimientos<br>& Afiliaciones" data-en="Awards<br>& Affiliations">Reconocimientos<br>& Afiliaciones</h2>
+  </div>
+  <div class="dist-grid fade-in">
+    <div class="dist-item">
+      <span class="dist-icon">🏛️</span>
+      <div class="dist-content">
+        <div class="dist-title" data-es="Presidente, Comité de IA" data-en="President, AI Committee">Presidente, Comité de IA</div>
+        <div class="dist-detail">AmCham Chile · 2021–</div>
+      </div>
+    </div>
+    <div class="dist-item">
+      <span class="dist-icon">🔬</span>
+      <div class="dist-content">
+        <div class="dist-title">Research Collaborator</div>
+        <div class="dist-detail">Cambridge Service Alliance · University of Cambridge</div>
+      </div>
+    </div>
+    <div class="dist-item">
+      <span class="dist-icon">🎓</span>
+      <div class="dist-content">
+        <div class="dist-title">Honorary Research Fellow</div>
+        <div class="dist-detail">University of Manchester · Manchester Business School</div>
+      </div>
+    </div>
+    <div class="dist-item">
+      <span class="dist-icon">🌐</span>
+      <div class="dist-content">
+        <div class="dist-title" data-es="Asesor Internacional" data-en="International Advisor">Asesor Internacional</div>
+        <div class="dist-detail">BID · HSBC · World Bank</div>
+      </div>
+    </div>
+    <div class="dist-item">
+      <span class="dist-icon">🏆</span>
+      <div class="dist-content">
+        <div class="dist-title" data-es="Premio Docencia de Excelencia" data-en="Teaching Excellence Award">Premio Docencia de Excelencia</div>
+        <div class="dist-detail" data-es="FEN Universidad de Chile" data-en="FEN Universidad de Chile">FEN Universidad de Chile</div>
+      </div>
+    </div>
+    <div class="dist-item">
+      <span class="dist-icon">📖</span>
+      <div class="dist-content">
+        <div class="dist-title" data-es="Visiting Researcher" data-en="Visiting Researcher">Visiting Researcher</div>
+        <div class="dist-detail">Aristotle University of Thessaloniki · Data Engineering Lab</div>
+      </div>
+    </div>
+    <div class="dist-item">
+      <span class="dist-icon">🤝</span>
+      <div class="dist-content">
+        <div class="dist-title" data-es="Co-Director Académico" data-en="Academic Co-Director">Co-Director Académico</div>
+        <div class="dist-detail" data-es="Magíster en Analítica de Negocios (MIT/UChile)" data-en="MSc Business Analytics (MIT/UChile)">Magíster en Analítica de Negocios (MIT/UChile)</div>
+      </div>
+    </div>
+    <div class="dist-item">
+      <span class="dist-icon">⭐</span>
+      <div class="dist-content">
+        <div class="dist-title" data-es="Director Observatorio de IA e Innovación" data-en="Director, AI & Innovation Observatory">Director Observatorio de IA e Innovación</div>
+        <div class="dist-detail" data-es="Depto. Administración, FEN U. de Chile" data-en="Dept. Administration, FEN U. de Chile">Depto. Administración, FEN U. de Chile</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MEDIA ─── -->
+<section id="media">
+  <div class="section-header fade-in">
+    <div class="section-label" data-es="// 06 — en los medios" data-en="// 06 — media">// 06 — en los medios</div>
+    <h2 class="section-title" data-es="Entrevistas,<br>Radio & Podcasts" data-en="Interviews,<br>Radio & Podcasts">Entrevistas,<br>Radio & Podcasts</h2>
+    <p class="section-subtitle" data-es="Apariciones recientes en medios, programas radiales y podcasts." data-en="Recent appearances in media, radio programmes and podcasts.">Apariciones recientes en medios, programas radiales y podcasts.</p>
+  </div>
+  <div class="tools-grid fade-in">
+
+    <a class="tool-card" href="https://www.youtube.com/watch?v=tbAyjjO0b34" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">📻</span>
+      <div class="tool-name" data-es="Radio Infinita · Más que Números" data-en="Radio Infinita · Más que Números">Radio Infinita · Más que Números</div>
+      <div class="tool-desc" data-es='"La IA no reemplaza tu trabajo, reemplaza tareas dentro de él." Entrevista en el segmento Generación FEN sobre IA, crédito y el futuro del trabajo.' data-en='"AI does not replace your job, it replaces tasks within it." Interview on the Generación FEN segment on AI, credit scoring and the future of work.'>"La IA no reemplaza tu trabajo, reemplaza tareas dentro de él." Entrevista en el segmento Generación FEN sobre IA, crédito y el futuro del trabajo.</div>
+      <div class="tool-stack">
+        <span class="stack-tag">Radio · Sept 2025</span>
+        <span class="stack-tag">YouTube · FEN UChile</span>
+      </div>
+    </a>
+
+    <div class="tool-card" style="opacity:0.6; cursor:default;">
+      <span class="tool-icon">🎙️</span>
+      <div class="tool-name" data-es="Próximamente — más apariciones" data-en="Coming soon — more appearances">Próximamente — más apariciones</div>
+      <div class="tool-desc" data-es="Agrega aquí tus otras entrevistas en radio y podcast. Comparte los links cuando los tengas disponibles." data-en="Add your other radio and podcast interviews here. Share the links when you have them available.">Agrega aquí tus otras entrevistas en radio y podcast. Comparte los links cuando los tengas disponibles.</div>
+      <div class="tool-stack">
+        <span class="stack-tag">Por confirmar</span>
+      </div>
+    </div>
+
+    <a class="tool-card" href="https://alumni.fen.uchile.cl/noticia/academico-y-alumni-fen-david-diaz-solis-la-inteligencia-artificial-no-reemplaza-tu-trabajo-reemplaza-tareas-dentro-de-el" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">📰</span>
+      <div class="tool-name">FEN Alumni · Noticia</div>
+      <div class="tool-desc" data-es="Nota completa sobre la entrevista en Radio Infinita, con contexto de investigación sobre LLMs y predicción de riesgo de crédito junto a la CMF." data-en="Full article on the Radio Infinita interview, with research context on LLMs and credit risk prediction in collaboration with the CMF.">Nota completa sobre la entrevista en Radio Infinita, con contexto de investigación sobre LLMs y predicción de riesgo de crédito junto a la CMF.</div>
+      <div class="tool-stack">
+        <span class="stack-tag">Prensa · Sept 2025</span>
+        <span class="stack-tag">alumni.fen.uchile.cl</span>
+      </div>
+    </a>
+
+    <a class="tool-card" href="https://fen.uchile.cl/es/academicos/david-diaz-2/" target="_blank" style="text-decoration:none;color:inherit;">
+      <span class="tool-icon">📝</span>
+      <div class="tool-name" data-es="Revista Economía & Administración" data-en="Revista Economía & Administración">Revista Economía & Administración</div>
+      <div class="tool-desc" data-es='"IA: ¿Humo o Fuego? Automatización, Aumentación, Competencia y Humanidad: Consejos para sobrevivir en la era de las tarifas." Mirada FEN, N° 189.' data-en='"AI: Smoke or Fire? Automation, Augmentation, Competition and Humanity: Advice for surviving in the era of tariffs." Mirada FEN, No. 189.'>"IA: ¿Humo o Fuego? Automatización, Aumentación, Competencia y Humanidad." Mirada FEN, N° 189.</div>
+      <div class="tool-stack">
+        <span class="stack-tag">Columna · 2025</span>
+        <span class="stack-tag">FEN UChile</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="contact-inner fade-in">
+    <div class="section-header">
+      <div class="section-label" data-es="// 07 — contacto" data-en="// 07 — contact">// 07 — contacto</div>
+      <h2 class="section-title" data-es="Hablemos" data-en="Let's Talk">Hablemos</h2>
+    </div>
+    <p class="contact-desc" data-es="¿Investigación colaborativa, consultoría, docencia ejecutiva o simplemente conversar sobre IA aplicada? Puedes encontrarme en los siguientes canales." data-en="Collaborative research, consulting, executive education or just a conversation about applied AI? You can find me on the following channels.">
+      ¿Investigación colaborativa, consultoría, docencia ejecutiva o simplemente conversar sobre IA aplicada? Puedes encontrarme en los siguientes canales.
+    </p>
+    <div class="contact-links">
+      <a class="contact-link-item" href="mailto:ddiaz@fen.uchile.cl">
+        <span class="contact-link-icon">✉️</span>
+        <div class="contact-link-text">
+          <div class="contact-link-label">EMAIL</div>
+          <div class="contact-link-value">ddiaz@fen.uchile.cl</div>
+        </div>
+      </a>
+      <a class="contact-link-item" href="https://www.linkedin.com/in/david-diaz-s-phd-71430622/" target="_blank">
+        <span class="contact-link-icon">💼</span>
+        <div class="contact-link-text">
+          <div class="contact-link-label">LINKEDIN</div>
+          <div class="contact-link-value">david-diaz-s-phd</div>
+        </div>
+      </a>
+      <a class="contact-link-item" href="https://scholar.google.com/citations?user=6m3sR_oAAAAJ" target="_blank">
+        <span class="contact-link-icon">📖</span>
+        <div class="contact-link-text">
+          <div class="contact-link-label">GOOGLE SCHOLAR</div>
+          <div class="contact-link-value">David Diaz · 1,700+ citations</div>
+        </div>
+      </a>
+      <a class="contact-link-item" href="https://github.com/daviddiazsolis" target="_blank">
+        <span class="contact-link-icon">💻</span>
+        <div class="contact-link-text">
+          <div class="contact-link-label">GITHUB</div>
+          <div class="contact-link-value">github.com/daviddiazsolis</div>
+        </div>
+      </a>
+      <a class="contact-link-item" href="https://orcid.org/0000-0001-7149-0535" target="_blank">
+        <span class="contact-link-icon">🆔</span>
+        <div class="contact-link-text">
+          <div class="contact-link-label">ORCID</div>
+          <div class="contact-link-value">0000-0001-7149-0535</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-copy">© 2025 David Díaz Solís · Santiago, Chile</div>
+  <div class="footer-built">built with <span>Next.js + Vercel</span> · daviddiazsolis.com</div>
+</footer>
+
+<!-- ─── JS ─── -->
+<script>
+  /* --- LANG --- */
+  let currentLang = 'es';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-es]').forEach(el => {
+      if (lang === 'es') {
+        el.innerHTML = el.getAttribute('data-es');
+      } else {
+        el.innerHTML = el.getAttribute('data-en');
+      }
+    });
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+  }
+
+  /* --- THEME --- */
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('btn-theme').textContent = isDark ? '☾' : '☀';
+  }
+
+  /* --- MOBILE MENU --- */
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  /* --- FILTER PUBS --- */
+  function filterPubs(type) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.pub-item').forEach(item => {
+      if (type === 'all' || item.getAttribute('data-type') === type) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  }
+
+  /* --- SCROLL ANIMATIONS --- */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // stagger children
+        const children = e.target.querySelectorAll('.pub-item, .tool-card, .course-card, .dist-item, .cred-item');
+        children.forEach((child, i) => {
+          child.style.transitionDelay = `${i * 0.06}s`;
+          child.classList.add('fade-in', 'visible');
+        });
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* --- NAV ACTIVE on scroll --- */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) cur = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
