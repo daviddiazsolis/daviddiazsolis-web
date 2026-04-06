@@ -47,13 +47,7 @@ export default function Hero() {
       <div className="hero-visual">
         <div className="hero-card">
           <div className="profile-header">
-            <div className="profile-avatar">
-              <img
-                src="https://alumni.fen.uchile.cl/uploads/noticia/medium_5ea9c504ce7177df1923971323277640bf3909d6.jpg"
-                alt="David Díaz Solís"
-                onError={e => { (e.currentTarget.parentElement!).textContent = 'DDS' }}
-              />
-            </div>
+            <div className="profile-avatar">DDS</div>
             <div className="profile-info">
               <h3>David Díaz Solís</h3>
               <p>@daviddiazsolis</p>
