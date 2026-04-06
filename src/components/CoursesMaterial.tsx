@@ -10,9 +10,9 @@ interface Resource {
 }
 
 const FILES: Resource[] = [
-  { icon: '📑', name: 'LLMs_Text_Analytics_Intro_EVIC_2025.pptx', tag: 'Slides', href: 'https://daviddiazsolis.com/wp-content/uploads/2025/11/LLMs_Text_Analytics_Intro_EVIC_2025-1.pptx' },
-  { icon: '📊', name: 'reviews_sample.xlsx', tag: 'Dataset', href: 'https://daviddiazsolis.com/wp-content/uploads/2025/11/reviews_sample.xlsx' },
-  { icon: '🐍', name: 'codigos_py.zip', tag: 'Python', href: 'https://daviddiazsolis.com/wp-content/uploads/2025/11/codigos_py.zip' },
+  { icon: '📑', name: 'LLMs_Text_Analytics_Intro_EVIC_2025.pptx', tag: 'Slides', href: '/evic/LLMs_Text_Analytics_Intro_EVIC_2025.pptx' },
+  { icon: '📊', name: 'reviews_sample.xlsx', tag: 'Dataset', href: '/evic/reviews_sample.xlsx' },
+  { icon: '🐍', name: 'codigos_py.zip', tag: 'Python', href: '/evic/codigos_py.zip' },
 ]
 
 const NOTEBOOKS: Resource[] = [
