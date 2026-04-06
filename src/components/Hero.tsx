@@ -26,6 +26,7 @@ export default function Hero() {
         <div className="hero-links">
           <a className="btn-primary" href="#research">{t('heroBtnResearch')}</a>
           <a className="btn-outline" href="#tools">{t('heroBtnTools')}</a>
+          <a className="btn-outline" href="/cv-david-diaz-solis.pdf" target="_blank" rel="noreferrer">{t('heroBtnCV')}</a>
         </div>
 
         <div className="hero-stats">

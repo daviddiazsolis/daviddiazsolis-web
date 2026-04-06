@@ -38,28 +38,24 @@ export default function About() {
         </div>
         <div className="credentials-list fade-in">
           <div className="cred-item">
-            <div className="cred-degree">Ph.D. in Business Intelligence</div>
+            <div className="cred-degree">Ph.D. Business Intelligence <span className="cred-year">2007–2011</span></div>
             <div className="cred-school">University of Manchester · Alliance Manchester Business School</div>
           </div>
           <div className="cred-item">
-            <div className="cred-degree">{t('credMasterFinance')}</div>
+            <div className="cred-degree">{t('credMasterFinance')} <span className="cred-year">2004–2005</span></div>
             <div className="cred-school">Universidad de Chile · Santiago</div>
           </div>
           <div className="cred-item">
-            <div className="cred-degree">{t('credBusinessEng')}</div>
+            <div className="cred-degree">{t('credDiplomado')} <span className="cred-year">2018</span></div>
+            <div className="cred-school">Pontificia Universidad Católica de Chile</div>
+          </div>
+          <div className="cred-item">
+            <div className="cred-degree">{t('credBusinessEng')} <span className="cred-year">2000–2002</span></div>
             <div className="cred-school">Universidad de Chile · Santiago</div>
           </div>
           <div className="cred-item">
-            <div className="cred-degree">Visiting Researcher</div>
-            <div className="cred-school">Cambridge Service Alliance · University of Cambridge</div>
-          </div>
-          <div className="cred-item">
-            <div className="cred-degree">Visiting Researcher</div>
-            <div className="cred-school">Aristotle University of Thessaloniki · Data Engineering Lab</div>
-          </div>
-          <div className="cred-item">
-            <div className="cred-degree">Honorary Research Fellow</div>
-            <div className="cred-school">The University of Manchester · Manchester Business School</div>
+            <div className="cred-degree">{t('credLicenciado')} <span className="cred-year">1998–1999</span></div>
+            <div className="cred-school">Universidad de Chile · Santiago</div>
           </div>
         </div>
       </div>
