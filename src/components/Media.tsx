@@ -60,6 +60,38 @@ export default function Media() {
 
         <a
           className="tool-card"
+          href="https://www.youtube.com/watch?v=zw6TIWrogOg"
+          target="_blank"
+          rel="noreferrer"
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <span className="tool-icon">🎙️</span>
+          <div className="tool-name">{t('mediaPodcastInnovName')}</div>
+          <div className="tool-desc">{t('mediaPodcastInnovDesc')}</div>
+          <div className="tool-stack">
+            <span className="stack-tag">Podcast · Innovación #7</span>
+            <span className="stack-tag">YouTube · uNegocios</span>
+          </div>
+        </a>
+
+        <a
+          className="tool-card"
+          href="https://www.youtube.com/watch?v=O8r57FrmkCQ"
+          target="_blank"
+          rel="noreferrer"
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <span className="tool-icon">🎨</span>
+          <div className="tool-name">{t('mediaPodcastDesignName')}</div>
+          <div className="tool-desc">{t('mediaPodcastDesignDesc')}</div>
+          <div className="tool-stack">
+            <span className="stack-tag">VideoPodcast #6</span>
+            <span className="stack-tag">YouTube · uNegocios</span>
+          </div>
+        </a>
+
+        <a
+          className="tool-card"
           href="https://alumni.fen.uchile.cl/noticia/academico-y-alumni-fen-david-diaz-solis-la-inteligencia-artificial-no-reemplaza-tu-trabajo-reemplaza-tareas-dentro-de-el"
           target="_blank"
           rel="noreferrer"
