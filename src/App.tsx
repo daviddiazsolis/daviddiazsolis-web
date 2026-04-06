@@ -7,6 +7,7 @@ import About from './components/About'
 import Research from './components/Research'
 import Tools from './components/Tools'
 import Teaching from './components/Teaching'
+import CoursesMaterial from './components/CoursesMaterial'
 import Distinctions from './components/Distinctions'
 import Media from './components/Media'
 import Contact from './components/Contact'
@@ -21,6 +22,7 @@ function AppInner() {
       <Research />
       <Tools />
       <Teaching />
+      <CoursesMaterial />
       <Distinctions />
       <Media />
       <Contact />

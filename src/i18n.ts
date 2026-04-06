@@ -123,6 +123,16 @@ export const translations: Record<Language, Record<string, string>> = {
     mediaRevisteName: 'Revista Economía & Administración',
     mediaRevistaDesc: '"IA: ¿Humo o Fuego? Automatización, Aumentación, Competencia y Humanidad." Mirada FEN, N° 189.',
 
+    // Course Material
+    materialLabel: '// material docente',
+    materialTitle: 'Material de Cursos',
+    materialSubtitle: 'Archivos, notebooks y recursos de cursos dictados.',
+    evicTitle: 'Taller Text Analytics con LLMs',
+    evicDesc: 'Escuela de Verano de Inteligencia Computacional (EVIC) · Noviembre 2025. Taller introductorio sobre cómo la IA generativa y los LLMs transforman el análisis de texto en investigación y negocios: análisis de sentimientos, clasificación supervisada y descubrimiento de tópicos.',
+    evicGroupFiles: 'Archivos del curso',
+    evicGroupNotebooks: 'Notebooks — Google Colab',
+    evicGroupLinks: 'Links útiles',
+
     // Contact
     contactLabel: '// 07 — contacto',
     contactTitle: 'Hablemos',
@@ -252,6 +262,16 @@ export const translations: Record<Language, Record<string, string>> = {
     mediaAlumniDesc: 'Full article on the Radio Infinita interview, with research context on LLMs and credit risk prediction in collaboration with the CMF.',
     mediaRevisteName: 'Revista Economía & Administración',
     mediaRevistaDesc: '"AI: Smoke or Fire? Automation, Augmentation, Competition and Humanity." Mirada FEN, No. 189.',
+
+    // Course Material
+    materialLabel: '// course material',
+    materialTitle: 'Course Materials',
+    materialSubtitle: 'Files, notebooks and resources from courses taught.',
+    evicTitle: 'Text Analytics with LLMs Workshop',
+    evicDesc: 'Escuela de Verano de Inteligencia Computacional (EVIC) · November 2025. Introductory workshop on how generative AI and LLMs transform text analysis in research and business: sentiment analysis, supervised classification and topic discovery.',
+    evicGroupFiles: 'Course files',
+    evicGroupNotebooks: 'Notebooks — Google Colab',
+    evicGroupLinks: 'Useful links',
 
     // Contact
     contactLabel: '// 07 — contact',

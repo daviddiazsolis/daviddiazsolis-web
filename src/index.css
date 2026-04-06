@@ -610,6 +610,93 @@ html.light .hero-badge {
 .level-ug { background: rgba(251,113,133,0.1); color: var(--accent3); }
 .level-exec { background: rgba(251,191,36,0.12); color: var(--accent2); }
 
+/* ─── COURSE MATERIAL ─── */
+.evic-header {
+  margin-bottom: 2.5rem;
+}
+.evic-badge {
+  display: inline-block;
+  font-family: ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent2);
+  background: rgba(251,191,36,0.1);
+  border: 1px solid rgba(251,191,36,0.25);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+.evic-title {
+  font-family: system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+.evic-desc {
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.75;
+  max-width: 680px;
+}
+.evic-group-label {
+  font-family: ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.evic-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.evic-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.2rem;
+  transition: all 0.2s;
+  color: var(--text);
+}
+.evic-card:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+.evic-icon { font-size: 1.2rem; flex-shrink: 0; }
+.evic-card-body { flex: 1; min-width: 0; }
+.evic-card-name {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.evic-tag {
+  font-family: ui-monospace, monospace;
+  font-size: 0.66rem;
+  color: var(--text3);
+  background: var(--bg3);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  margin-top: 0.2rem;
+  display: inline-block;
+}
+.evic-arrow {
+  font-size: 0.9rem;
+  color: var(--text3);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+.evic-card:hover .evic-arrow { color: var(--accent); }
+
 /* ─── DISTINCTIONS ─── */
 .dist-grid {
   display: grid;
