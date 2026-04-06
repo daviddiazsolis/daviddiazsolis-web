@@ -28,6 +28,8 @@ export default function Nav() {
     { href: '#research', key: 'navResearch' },
     { href: '#tools', key: 'navTools' },
     { href: '#teaching', key: 'navTeaching' },
+    { href: '#material', key: 'navMaterial' },
+    { href: '#distinctions', key: 'navDistinctions' },
     { href: '#media', key: 'navMedia' },
     { href: '#contact', key: 'navContact' },
   ]

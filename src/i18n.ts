@@ -8,6 +8,8 @@ export const translations: Record<Language, Record<string, string>> = {
     navResearch: 'Investigación',
     navTools: 'Herramientas',
     navTeaching: 'Docencia',
+    navMaterial: 'Material',
+    navDistinctions: 'Distinciones',
     navMedia: 'Medios',
     navContact: 'Contacto',
 
@@ -148,6 +150,8 @@ export const translations: Record<Language, Record<string, string>> = {
     navResearch: 'Research',
     navTools: 'Tools',
     navTeaching: 'Teaching',
+    navMaterial: 'Material',
+    navDistinctions: 'Distinctions',
     navMedia: 'Media',
     navContact: 'Contact',
 
