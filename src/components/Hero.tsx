@@ -48,7 +48,7 @@ export default function Hero() {
         <div className="hero-card">
           <div className="profile-header">
             <div className="profile-avatar">
-              <img src="/foto.png" alt="David Díaz Solís" onError={e => { e.currentTarget.style.display = 'none' }} />
+              <img src="/foto.png" alt="David Díaz Solís" onError={e => { e.currentTarget.replaceWith(Object.assign(document.createTextNode('DDS'))) }} />
             </div>
             <div className="profile-info">
               <h3>David Díaz Solís</h3>
