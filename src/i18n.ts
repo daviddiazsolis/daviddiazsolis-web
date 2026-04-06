@@ -32,7 +32,7 @@ export const translations: Record<Language, Record<string, string>> = {
     aboutTitleLine2: '& Constructor de IA',
     aboutP1: 'Soy <strong>Profesor Asociado</strong> en el Departamento de Administración de la Facultad de Economía y Negocios de la Universidad de Chile, con especialización en Business Intelligence, IA aplicada y Data Analytics.',
     aboutP2: 'Mi investigación se sitúa en la intersección entre <strong>machine learning, analítica de servicios y toma de decisiones financieras</strong>. Con más de 20 artículos en revistas WoS y Scopus, capítulos de libros y presentaciones internacionales, contribuyo activamente al campo desde Latinoamérica hacia audiencias globales.',
-    aboutP3: 'También dirijo el <strong>Programa Data Analytics Certificate</strong> (joint MIT Sloan/FCFM) y el MBA Evening, y actúo como asesor para el Banco Interamericano de Desarrollo, HSBC y el Banco Mundial.',
+    aboutP3: 'También dirijo el <strong>Programa Business Analytics Certificate</strong> (joint MIT Sloan) y el MBA Evening FEN UChile. He sido asesor para el Banco Interamericano de Desarrollo, HSBC, el Banco Mundial, entre otras empresas y organizaciones nacionales e internacionales.',
     credMasterFinance: 'Magíster en Finanzas',
     credBusinessEng: 'Ingeniero Comercial',
 
@@ -162,7 +162,7 @@ export const translations: Record<Language, Record<string, string>> = {
     aboutTitleLine2: '& AI Builder',
     aboutP1: 'I am an <strong>Associate Professor</strong> at the Department of Administration, Faculty of Economics and Business, Universidad de Chile, specializing in Business Intelligence, Applied AI and Data Analytics.',
     aboutP2: 'My research sits at the intersection of <strong>machine learning, service analytics and financial decision-making</strong>. With over 20 articles in WoS and Scopus journals, book chapters and international presentations, I actively contribute to the field from Latin America for global audiences.',
-    aboutP3: 'I also direct the <strong>Data Analytics Certificate Programme</strong> (joint MIT Sloan/FCFM) and the MBA Evening, and advise institutions including the Inter-American Development Bank, HSBC and the World Bank.',
+    aboutP3: 'I also direct the <strong>Business Analytics Certificate Programme</strong> (joint MIT Sloan) and the MBA Evening FEN UChile. I have advised the Inter-American Development Bank, HSBC, the World Bank, and other national and international companies and organisations.',
     credMasterFinance: "Master's in Finance",
     credBusinessEng: 'Business Engineer (Ingeniero Comercial)',
 

@@ -60,7 +60,6 @@ export default function Hero() {
             <li className="affil-item"><span className="affil-dot" /><span>{t('heroAffilMIT')}</span></li>
             <li className="affil-item"><span className="affil-dot" /><span>{t('heroAffilCambridge')}</span></li>
             <li className="affil-item"><span className="affil-dot" /><span>{t('heroAffilObs')}</span></li>
-            <li className="affil-item"><span className="affil-dot" /><span>{t('heroAffilAmCham')}</span></li>
           </ul>
           <div className="hero-external-links">
             <a className="ext-link" href="https://scholar.google.com/citations?user=6m3sR_oAAAAJ" target="_blank" rel="noreferrer">Google Scholar</a>
