@@ -507,6 +507,16 @@ html.light .hero-badge {
   margin-top: 0.2rem;
   font-family: ui-monospace, monospace;
 }
+.pub-doi {
+  display: inline-block;
+  font-family: ui-monospace, monospace;
+  font-size: 0.7rem;
+  color: var(--text3);
+  margin-top: 0.5rem;
+  transition: color 0.2s;
+  word-break: break-all;
+}
+.pub-doi:hover { color: var(--accent); }
 
 /* ─── TOOLS ─── */
 .tools-grid {
