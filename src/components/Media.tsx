@@ -76,6 +76,22 @@ export default function Media() {
 
         <a
           className="tool-card"
+          href="https://www.youtube.com/watch?v=LcpHbaDevag"
+          target="_blank"
+          rel="noreferrer"
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <span className="tool-icon">🚀</span>
+          <div className="tool-name">{t('mediaPodcastAIName')}</div>
+          <div className="tool-desc">{t('mediaPodcastAIDesc')}</div>
+          <div className="tool-stack">
+            <span className="stack-tag">VideoPodcast #5</span>
+            <span className="stack-tag">YouTube · uNegocios</span>
+          </div>
+        </a>
+
+        <a
+          className="tool-card"
           href="https://www.youtube.com/watch?v=O8r57FrmkCQ"
           target="_blank"
           rel="noreferrer"
