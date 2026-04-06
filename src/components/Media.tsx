@@ -42,14 +42,21 @@ export default function Media() {
           </div>
         </a>
 
-        <div className="tool-card" style={{ opacity: 0.6, cursor: 'default' }}>
-          <span className="tool-icon">🎙️</span>
-          <div className="tool-name">{t('mediaComingSoonName')}</div>
-          <div className="tool-desc">{t('mediaComingSoonDesc')}</div>
+        <a
+          className="tool-card"
+          href="https://youtu.be/vLSoaZQQSSQ"
+          target="_blank"
+          rel="noreferrer"
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <span className="tool-icon">🏦</span>
+          <div className="tool-name">{t('mediaSantanderName')}</div>
+          <div className="tool-desc">{t('mediaSantanderDesc')}</div>
           <div className="tool-stack">
-            <span className="stack-tag">Por confirmar</span>
+            <span className="stack-tag">YouTube · uNegocios</span>
+            <span className="stack-tag">Fintech · Open Banking</span>
           </div>
-        </div>
+        </a>
 
         <a
           className="tool-card"
