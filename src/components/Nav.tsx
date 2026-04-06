@@ -37,7 +37,7 @@ export default function Nav() {
   return (
     <>
       <nav>
-        <div className="nav-logo">David<span>.</span>Díaz</div>
+        <a className="nav-logo" href="#" aria-label="Inicio">David<span>.</span>Díaz</a>
 
         <ul className="nav-links">
           {navItems.map(item => (

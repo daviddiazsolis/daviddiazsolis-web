@@ -75,6 +75,8 @@ html.light nav {
   font-size: 1.2rem;
   color: var(--text);
   letter-spacing: -0.02em;
+  text-decoration: none;
+  cursor: pointer;
 }
 .nav-logo span { color: var(--accent); }
 .nav-links {
