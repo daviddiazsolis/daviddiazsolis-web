@@ -108,6 +108,22 @@ export default function Media() {
 
         <a
           className="tool-card"
+          href="https://open.spotify.com/show/1ittYjfbbplsZKZ4aeyjbi"
+          target="_blank"
+          rel="noreferrer"
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <span className="tool-icon">🎧</span>
+          <div className="tool-name">{t('mediaSpotifyName')}</div>
+          <div className="tool-desc">{t('mediaSpotifyDesc')}</div>
+          <div className="tool-stack">
+            <span className="stack-tag">Spotify</span>
+            <span className="stack-tag">Temporada completa</span>
+          </div>
+        </a>
+
+        <a
+          className="tool-card"
           href="https://alumni.fen.uchile.cl/noticia/academico-y-alumni-fen-david-diaz-solis-la-inteligencia-artificial-no-reemplaza-tu-trabajo-reemplaza-tareas-dentro-de-el"
           target="_blank"
           rel="noreferrer"
