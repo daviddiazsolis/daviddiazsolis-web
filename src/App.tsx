@@ -3,6 +3,7 @@ import { ThemeProvider } from './context/ThemeContext'
 import { LanguageProvider } from './context/LanguageContext'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import Affiliations from './components/Affiliations'
 import About from './components/About'
 import Research from './components/Research'
 import Tools from './components/Tools'
@@ -18,6 +19,7 @@ function AppInner() {
     <>
       <Nav />
       <Hero />
+      <Affiliations />
       <About />
       <Research />
       <Tools />

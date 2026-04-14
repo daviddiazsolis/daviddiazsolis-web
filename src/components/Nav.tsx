@@ -24,6 +24,7 @@ export default function Nav() {
   }, [])
 
   const navItems = [
+    { href: '#affiliations', key: 'navAffiliations' },
     { href: '#about', key: 'navAbout' },
     { href: '#research', key: 'navResearch' },
     { href: '#tools', key: 'navTools' },
