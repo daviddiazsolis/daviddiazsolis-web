@@ -20,7 +20,7 @@ const TOOLS: ToolItem[] = [
   { href: 'https://autoencoder-embedding-playground.vercel.app', icon: '🔮', nameKey: 'toolAEName', descKey: 'toolAEDesc', tags: ['TypeScript', 'TensorFlow.js', 'Vercel ✓'] },
   { href: 'https://clustering-playground.vercel.app', icon: '🔵', nameKey: 'toolClusterName', descKey: 'toolClusterDesc', tags: ['TypeScript', 'React', 'Vercel'] },
   { href: 'https://association-rules-playground.vercel.app', icon: '🔗', nameKey: 'toolARName', descKey: 'toolARDesc', tags: ['TypeScript', 'React', 'Vercel'] },
-  { href: 'https://github.com/daviddiazsolis/ml_landscape_crispdm', icon: '🗺️', nameKey: 'toolMLLandName', descKey: 'toolMLLandDesc', tags: ['TypeScript', 'React', 'Vercel'] },
+  { href: 'https://ml-landscape-playground.vercel.app', icon: '🗺️', nameKey: 'toolMLLandName', descKey: 'toolMLLandDesc', tags: ['TypeScript', 'React', 'Vercel'] },
   { href: 'https://github.com/daviddiazsolis/c50py', icon: '🌳', nameKey: 'toolC50Name', descKey: 'toolC50Desc', tags: ['Python', 'scikit-learn API', 'GNU GPL'] },
   { href: 'https://github.com/daviddiazsolis/Ayudantias-MIT-UCHILE', icon: '📚', nameKey: 'toolAyudName', descKey: 'toolAyudDesc', tags: ['Python', 'Jupyter', 'MIT/UChile'] },
 ]
