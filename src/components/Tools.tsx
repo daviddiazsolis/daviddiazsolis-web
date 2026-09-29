@@ -13,6 +13,8 @@ interface ToolItem {
 
 const TOOLS: ToolItem[] = [
   { href: 'https://kernel-neural-playground.vercel.app', icon: '🧠', nameKey: 'toolKernelName', descKey: 'toolKernelDesc', tags: ['TypeScript', 'Vercel'], accentTag: true },
+  { href: 'https://regression-intro-playground.vercel.app', icon: '📉', nameKey: 'toolRegIntroName', descKey: 'toolRegIntroDesc', tags: ['TypeScript', 'MathJax', 'Vercel'], accentTag: true },
+  { href: 'https://classification-intro-playground.vercel.app', icon: '🎯', nameKey: 'toolClaIntroName', descKey: 'toolClaIntroDesc', tags: ['TypeScript', 'MathJax', 'Vercel'], accentTag: true },
   { href: 'https://tree-foundations-playground.vercel.app', icon: '🌱', nameKey: 'toolTreeFoundName', descKey: 'toolTreeFoundDesc', tags: ['TypeScript', 'MathJax', 'Vercel'], accentTag: true },
   { href: 'https://tree-ensemble-playground.vercel.app', icon: '🌲', nameKey: 'toolTreeName', descKey: 'toolTreeDesc', tags: ['TypeScript', 'Vercel'], accentTag: true },
   { href: 'https://linear-models-playground.vercel.app', icon: '📈', nameKey: 'toolLinearName', descKey: 'toolLinearDesc', tags: ['TypeScript', 'Vercel'], accentTag: true },
