@@ -41,6 +41,7 @@ const ML_NOTEBOOKS_BASE = [
   { icon: '📝', name: 'Tarea: publicidad y ventas', en: 'Assignment: advertising and sales', repo: 'regression_intro_playground', file: 'Tarea_Publicidad_y_Ventas.ipynb' },
   { icon: '5️⃣', name: '05 Riesgo de crédito con regresión logística', en: '05 Credit risk with logistic regression', repo: 'classification_intro_playground', file: '05_Riesgo_de_Credito_Regresion_Logistica.ipynb' },
   { icon: '6️⃣', name: '06 Taiwán: más allá de la logística', en: '06 Taiwan: beyond logistic regression', repo: 'classification_intro_playground', file: '06_Riesgo_de_Credito_Taiwan_Mas_Alla_de_la_Logistica.ipynb' },
+  { icon: '7️⃣', name: '07 Calibración de probabilidades', en: '07 Probability calibration', repo: 'classification_intro_playground', file: '07_Calibracion_de_Probabilidades.ipynb' },
   { icon: '🌳', name: 'Árboles 01 Entropía e información', en: 'Trees 01 Entropy and information', repo: 'tree_foundations_playground', file: 'Arboles_01_Entropia_e_Informacion.ipynb' },
   { icon: '🌳', name: 'Árboles 02 Árboles de decisión (ID3, CART)', en: 'Trees 02 Decision trees (ID3, CART)', repo: 'tree_foundations_playground', file: 'Arboles_02_Arboles_de_Decision.ipynb' },
   { icon: '🌳', name: 'Árboles 03 Sobreajuste y poda', en: 'Trees 03 Overfitting and pruning', repo: 'tree_foundations_playground', file: 'Arboles_03_Sobreajuste_y_Poda.ipynb' },
