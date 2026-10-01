@@ -28,6 +28,8 @@ const nbPair = (repo: string, base: string, lang: 'en' | 'es') => colab(repo, la
 const ML_SITES: Resource[] = [
   { icon: '📉', name: 'Supervised Intro: Regression', tag: 'Micrositio', href: 'https://regression-intro-playground.vercel.app' },
   { icon: '🎯', name: 'Supervised Intro: Classification', tag: 'Micrositio', href: 'https://classification-intro-playground.vercel.app' },
+  { icon: '🧩', name: 'Clustering: aplicaciones financieras', tag: 'Micrositio', href: 'https://clustering-finance-playground.vercel.app' },
+  { icon: '🛰️', name: 'Aplicaciones de reducción de dimensionalidad en finanzas (PCA, t-SNE, UMAP, autoencoders)', tag: 'Micrositio', href: 'https://dimred-finance-playground.vercel.app' },
   { icon: '🌱', name: 'Tree & Ensemble Foundations', tag: 'Micrositio', href: 'https://tree-foundations-playground.vercel.app' },
   { icon: '🧭', name: 'ML & AI Learning Hub (todos los micrositios)', tag: 'Portal', href: 'https://ml-ai-portal.vercel.app' },
 ]
@@ -42,6 +44,13 @@ const ML_NOTEBOOKS_BASE = [
   { icon: '5️⃣', name: '05 Riesgo de crédito con regresión logística', en: '05 Credit risk with logistic regression', repo: 'classification_intro_playground', file: '05_Riesgo_de_Credito_Regresion_Logistica.ipynb' },
   { icon: '6️⃣', name: '06 Taiwán: más allá de la logística', en: '06 Taiwan: beyond logistic regression', repo: 'classification_intro_playground', file: '06_Riesgo_de_Credito_Taiwan_Mas_Alla_de_la_Logistica.ipynb' },
   { icon: '7️⃣', name: '07 Calibración de probabilidades', en: '07 Probability calibration', repo: 'classification_intro_playground', file: '07_Calibracion_de_Probabilidades.ipynb' },
+  { icon: '🧩', name: 'Clustering 1 Segmentación de clientes de un banco', en: 'Clustering 1 Segmenting a bank\'s customers', repo: 'clustering_finance_playground', file: 'Clustering_01_Segmentacion_de_Clientes.ipynb' },
+  { icon: '🧩', name: 'Clustering 2 Pair trading sobre el S&P 500', en: 'Clustering 2 Pair trading on the S&P 500', repo: 'clustering_finance_playground', file: 'Clustering_02_Pair_Trading.ipynb' },
+  { icon: '🧩', name: 'Clustering 3 Perfilamiento de inversionistas y sesgos', en: 'Clustering 3 Investor profiling and bias', repo: 'clustering_finance_playground', file: 'Clustering_03_Perfilamiento_de_Inversionistas.ipynb' },
+  { icon: '🧩', name: 'Clustering 4 De Markowitz a Hierarchical Risk Parity', en: 'Clustering 4 From Markowitz to Hierarchical Risk Parity', repo: 'clustering_finance_playground', file: 'Clustering_04_Hierarchical_Risk_Parity.ipynb' },
+  { icon: '8️⃣', name: '08 Detección de fraude con PCA', en: '08 Fraud detection with PCA', repo: 'dimred_finance_playground', file: '08_Fraude_con_PCA.ipynb' },
+  { icon: '9️⃣', name: '09 PCA de la curva de tasas en UF', en: '09 PCA of the UF yield curve', repo: 'dimred_finance_playground', file: '09_PCA_Curva_de_Tasas.ipynb' },
+  { icon: '🔟', name: '10 Detección de fraude con un autoencoder (Keras)', en: '10 Fraud detection with an autoencoder (Keras)', repo: 'dimred_finance_playground', file: '10_Fraude_con_Autoencoder.ipynb' },
   { icon: '🌳', name: 'Árboles 01 Entropía e información', en: 'Trees 01 Entropy and information', repo: 'tree_foundations_playground', file: 'Arboles_01_Entropia_e_Informacion.ipynb' },
   { icon: '🌳', name: 'Árboles 02 Árboles de decisión (ID3, CART)', en: 'Trees 02 Decision trees (ID3, CART)', repo: 'tree_foundations_playground', file: 'Arboles_02_Arboles_de_Decision.ipynb' },
   { icon: '🌳', name: 'Árboles 03 Sobreajuste y poda', en: 'Trees 03 Overfitting and pruning', repo: 'tree_foundations_playground', file: 'Arboles_03_Sobreajuste_y_Poda.ipynb' },
